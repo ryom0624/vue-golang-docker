@@ -1,9 +1,15 @@
-version: '3'
+version: '3.5'
 services:
   backend-api:
-    build: ./backend-api
+    build:
+      context: ./backend-api
+      target: build
+    volumes:
+      - ./backend-api:/go/app
+    command: ["realize", "start", "--run"]
+    # command: ["sleep", "6000000"]
     ports:
-      - "8080:8080"
+      - 8080:8080
 
   frontend:
     build: ./frontend
@@ -15,4 +21,4 @@ services:
     stdin_open: true
     tty: true
     command: ["npm", "run", "serve"]
-#    command: ["sleep", "6000000"]
+    #command: ["sleep", "6000000"]
