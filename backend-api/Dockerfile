@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install sqlite3 libsqlite3-dev -y
 WORKDIR /go
 ADD . /go
 
+RUN touch ./db/articles.sqlite3
 RUN sqlite3 ./db/articles.sqlite3 < ./db/init.sql
 
 RUN rm ./go.mod
